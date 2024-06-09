@@ -32,12 +32,20 @@ function addBookToLibrary(Book) {
     cardContainer.appendChild(card);
 }
 
+function renderLibrary() {
+    cardContainer.innerHTML = '';
+    myLibrary.forEach(book => addBookToLibrary(book));
+}
+
 const book1 = new Book("Test1", "ASSA", 123, false);
 const book2 = new Book("Test2", "SSA", 123, false);
 const book3 = new Book("Test3", "ASD", 123, true);
 myLibrary.push(book1, book2, book3);
 console.log(myLibrary)
 
-const book4 = new Book("Test3", "ASD", 123, true);
+renderLibrary();
 
-addBookToLibrary(book1);
+// const book4 = new Book("Test3", "ASD", 123, true);
+
+// addBookToLibrary(book1);
+// addBookToLibrary(book2);
