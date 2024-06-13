@@ -1,5 +1,8 @@
 const myLibrary = [];
 const cardContainer = document.querySelector('.card-container');
+const showBtn = document.querySelector('.add-book');
+const modal = document.querySelector('.modal');
+const addBtn = document.getElementById('new-book');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -8,21 +11,21 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary(Book) {
+function addBookToLibrary(book) {
     const card = document.createElement('div');
     card.classList.add('card');
 
     const cardTitle = document.createElement('h2');
-    cardTitle.textContent = `Title: ${Book.title}`;
+    cardTitle.textContent = `Title: ${book.title}`;
 
     const cardAuthor = document.createElement('p');
-    cardAuthor.textContent = `Author: ${Book.author}`;
+    cardAuthor.textContent = `Author: ${book.author}`;
 
     const cardPages = document.createElement('p');
-    cardPages.textContent = `Pages: ${Book.pages}`;
+    cardPages.textContent = `Pages: ${book.pages}`;
 
     const cardRead = document.createElement('p');
-    cardRead.textContent = `Read: ${Book.read}`;
+    cardRead.textContent = `Read: ${book.read}`;
 
     card.appendChild(cardTitle);
     card.appendChild(cardAuthor);
@@ -37,15 +40,14 @@ function renderLibrary() {
     myLibrary.forEach(book => addBookToLibrary(book));
 }
 
-const book1 = new Book("Test1", "ASSA", 123, false);
-const book2 = new Book("Test2", "SSA", 123, false);
+showBtn.addEventListener('click', () => {
+    modal.showModal();
+})
+
+const book1 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
+const book2 = new Book("Moby Dick", "Herman Melville", 635, false);
 const book3 = new Book("Test3", "ASD", 123, true);
 myLibrary.push(book1, book2, book3);
 console.log(myLibrary)
 
 renderLibrary();
-
-// const book4 = new Book("Test3", "ASD", 123, true);
-
-// addBookToLibrary(book1);
-// addBookToLibrary(book2);
