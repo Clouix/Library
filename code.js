@@ -27,17 +27,19 @@ function addBookToLibrary(book) {
     const cardPages = document.createElement('p');
     cardPages.textContent = `Pages: ${book.pages}`;
 
-    const cardRead = document.createElement('p');
-    cardRead.textContent = `Read: ${book.read}`;
-
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
+
+    const readBtn = document.createElement('button');
+    readBtn.textContent = book.read ? 'Read' : 'Not Read';
 
     card.appendChild(cardTitle);
     card.appendChild(cardAuthor);
     card.appendChild(cardPages);
-    card.appendChild(cardRead);
+    card.appendChild(readBtn);
     card.appendChild(removeBtn);
+
+    readBtn.onclick = () => toggleRead(book.bookId);
 
     removeBtn.onclick = () => removeBook(book.bookId);
 
@@ -69,6 +71,12 @@ function removeBook(bookId) {
     renderLibrary();
 }
 
+function toggleRead(bookId) {
+    const book = myLibrary.find(book => book.bookId === bookId);
+    book.read = !book.read;
+    renderLibrary();
+}
+
 showBtn.addEventListener('click', () => {
     modal.showModal();
 })
@@ -92,10 +100,9 @@ addBtn.addEventListener('click', (e) => {
     modal.close();
 })
 
-const book1 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
-const book2 = new Book("Moby Dick", "Herman Melville", 635, false);
+const book1 = new Book("To Kill a Mockingbird", "Harper Lee", 281, true);
+const book2 = new Book("Moby Dick", "Herman Melville", 635, true);
 const book3 = new Book("The Art of War", "Sun Tsu", 260, true);
 myLibrary.push(book1, book2, book3);
-console.log(myLibrary)
 
 renderLibrary();
